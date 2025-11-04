@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "appTitle": "Badminton Score",
+  "history": "History",
+  "teamAName": "Team A name",
+  "teamBName": "Team B name",
+  "startMatch": "Start Match",
+  "endSetTitle": "End Set?",
+  "endSetContent": "Confirm set result: {teamA} {scoreA} : {scoreB} {teamB}",
+  "keepup": "Continue",
+  "endSet": "End Set",
+  "resetSet": "Reset Set",
+  "endMatch": "End Match",
+  "noMatchesYet": "No matches yet",
+  "setLabel": "Set {index}",
+  "swipeHint": "Swipe ↑ to add • Swipe ↓ to subtract",
+  "vsFormat": "{teamA} vs {teamB}",
+  "setsCount": "Sets: {count}",
+  "resultSets": "Result: {a} - {b}"
+}

@@ -1,0 +1,5 @@
+template-arb-file: app_en.arb
+synthetic-package: false
+nullable-getter: false
+arb-dir: assets/l10n
+output-dir: lib/src/generated/l10n

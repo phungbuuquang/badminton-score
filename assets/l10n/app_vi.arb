@@ -1,0 +1,20 @@
+{
+  "@@locale": "vi",
+  "appTitle": "Ghi điểm Cầu lông",
+  "history": "Lịch sử",
+  "teamAName": "Tên đội A",
+  "teamBName": "Tên đội B",
+  "startMatch": "Bắt đầu trận",
+  "endSetTitle": "Kết thúc set?",
+  "endSetContent": "Xác nhận kết quả set: {teamA} {scoreA} : {scoreB} {teamB}",
+  "keepup": "Tiếp tục",
+  "endSet": "Kết thúc set",
+  "resetSet": "Làm lại set",
+  "endMatch": "Kết thúc trận",
+  "noMatchesYet": "Chưa có trận nào",
+  "setLabel": "Set {index}",
+  "swipeHint": "Vuốt ↑ để cộng • Vuốt ↓ để trừ",
+  "vsFormat": "{teamA} vs {teamB}",
+  "setsCount": "Số set: {count}",
+  "resultSets": "Kết quả: {a} - {b}"
+}
