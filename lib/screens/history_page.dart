@@ -1,7 +1,7 @@
+import 'package:badminton_score/models/match_record.dart';
 import 'package:badminton_score/src/generated/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../modesl/models.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -27,9 +27,12 @@ class HistoryPage extends StatelessWidget {
               final score = t.resultSets(m.setsWonA, m.setsWonB);
               return ListTile(
                 title: Text(t.vsFormat(m.teamA, m.teamB)),
-                subtitle: Text('${t.setsCount(sets)}  •  $score  •  ${m.createdAt.toLocal()}'),
+                subtitle: Text(
+                  '${t.setsCount(sets)}  •  $score  •  ${m.createdAt.toLocal()}',
+                ),
                 trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.pushNamed(context, '/match_detail', arguments: m),
+                onTap: () =>
+                    Navigator.pushNamed(context, '/match_detail', arguments: m),
               );
             },
           );

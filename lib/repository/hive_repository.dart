@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import '../modesl/models.dart';
+import '/models/match_record.dart';
 
 class MatchRepository {
   final Box<MatchRecord> box;

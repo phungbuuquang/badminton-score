@@ -8,7 +8,7 @@ import 'screens/home_page.dart';
 import 'screens/history_page.dart';
 import 'screens/match_detail_page.dart';
 import 'screens/match_page.dart';
-import 'modesl/models.dart';
+import 'models/match_record.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

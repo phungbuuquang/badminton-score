@@ -1,6 +1,6 @@
 import 'package:badminton_score/src/generated/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import '../modesl/models.dart';
+import '/models/match_record.dart';
 
 class MatchDetailPage extends StatelessWidget {
   final MatchRecord record;
@@ -18,7 +18,9 @@ class MatchDetailPage extends StatelessWidget {
           final set = record.sets[i];
           return ListTile(
             leading: CircleAvatar(child: Text('${i + 1}')),
-            title: Text('${record.teamA} ${set.scoreA} : ${set.scoreB} ${record.teamB}'),
+            title: Text(
+              '${record.teamA} ${set.scoreA} : ${set.scoreB} ${record.teamB}',
+            ),
           );
         },
       ),

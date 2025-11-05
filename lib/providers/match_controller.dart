@@ -1,6 +1,6 @@
+import 'package:badminton_score/models/match_record.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../modesl/models.dart';
 import '../utils/rules.dart';
 import 'package:hive/hive.dart';
 
@@ -10,7 +10,7 @@ class MatchState {
   final int scoreA;
   final int scoreB;
   final int setIndex;
-  final List<(int,int)> displayHistory; // for banner
+  final List<(int, int)> displayHistory; // for banner
   final List<SetRecord> records; // persisted
 
   const MatchState({
@@ -29,7 +29,7 @@ class MatchState {
     int? scoreA,
     int? scoreB,
     int? setIndex,
-    List<(int,int)>? displayHistory,
+    List<(int, int)>? displayHistory,
     List<SetRecord>? records,
   }) => MatchState(
     teamA: teamA ?? this.teamA,
@@ -45,7 +45,7 @@ class MatchState {
 class MatchController extends StateNotifier<MatchState> {
   final Box<MatchRecord> box;
   MatchController(this.box, String teamA, String teamB)
-      : super(MatchState(teamA: teamA, teamB: teamB));
+    : super(MatchState(teamA: teamA, teamB: teamB));
 
   void increaseA(BuildContext context) {
     final a = state.scoreA + 1;
@@ -86,7 +86,7 @@ class MatchController extends StateNotifier<MatchState> {
   Future<void> confirmEndSet() async {
     final a = state.scoreA;
     final b = state.scoreB;
-    final his = [...state.displayHistory, (a,b)];
+    final his = [...state.displayHistory, (a, b)];
     final recs = [...state.records, SetRecord(scoreA: a, scoreB: b)];
     state = state.copyWith(
       displayHistory: his,
@@ -114,9 +114,10 @@ class MatchController extends StateNotifier<MatchState> {
   }
 }
 
-final matchControllerProvider = StateNotifierProvider.family<MatchController, MatchState, (String, String)>(
-  (ref, args) {
-    final box = Hive.box<MatchRecord>('matches');
-    return MatchController(box, args.$1, args.$2);
-  },
-);
+final matchControllerProvider =
+    StateNotifierProvider.family<MatchController, MatchState, (String, String)>(
+      (ref, args) {
+        final box = Hive.box<MatchRecord>('matches');
+        return MatchController(box, args.$1, args.$2);
+      },
+    );

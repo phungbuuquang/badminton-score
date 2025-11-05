@@ -104,11 +104,124 @@ abstract class AppLocalizations {
   /// **'Badminton Score'**
   String get appTitle;
 
+  /// No description provided for @capAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Điểm trần'**
+  String get capAt;
+
+  /// No description provided for @endMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'End Match'**
+  String get endMatch;
+
+  /// No description provided for @endSet.
+  ///
+  /// In en, this message translates to:
+  /// **'End Set'**
+  String get endSet;
+
+  /// No description provided for @endSetContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm set result: {teamA} {scoreA} : {scoreB} {teamB}'**
+  String endSetContent(
+    Object scoreA,
+    Object scoreB,
+    Object teamA,
+    Object teamB,
+  );
+
+  /// No description provided for @endSetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'End Set?'**
+  String get endSetTitle;
+
   /// No description provided for @history.
   ///
   /// In en, this message translates to:
   /// **'History'**
   String get history;
+
+  /// No description provided for @invalidRules.
+  ///
+  /// In en, this message translates to:
+  /// **'Luật không hợp lệ: mục tiêu ≥1, cách biệt ≥1, trần ≥ mục tiêu.'**
+  String get invalidRules;
+
+  /// No description provided for @keepup.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get keepup;
+
+  /// No description provided for @noMatchesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches yet'**
+  String get noMatchesYet;
+
+  /// No description provided for @resetSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Set'**
+  String get resetSet;
+
+  /// No description provided for @resultSets.
+  ///
+  /// In en, this message translates to:
+  /// **'Result: {a} - {b}'**
+  String resultSets(Object a, Object b);
+
+  /// No description provided for @rules.
+  ///
+  /// In en, this message translates to:
+  /// **'Luật tính điểm'**
+  String get rules;
+
+  /// No description provided for @rulesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuỳ chỉnh điểm mục tiêu, cách biệt tối thiểu và điểm trần.'**
+  String get rulesDescription;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Lưu'**
+  String get save;
+
+  /// No description provided for @setLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Set {index}'**
+  String setLabel(Object index);
+
+  /// No description provided for @setsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets: {count}'**
+  String setsCount(Object count);
+
+  /// No description provided for @startMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Match'**
+  String get startMatch;
+
+  /// No description provided for @swipeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe ↑ to add • Swipe ↓ to subtract'**
+  String get swipeHint;
+
+  /// No description provided for @targetPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Điểm mục tiêu'**
+  String get targetPoints;
 
   /// No description provided for @teamAName.
   ///
@@ -122,88 +235,17 @@ abstract class AppLocalizations {
   /// **'Team B name'**
   String get teamBName;
 
-  /// No description provided for @startMatch.
-  ///
-  /// In en, this message translates to:
-  /// **'Start Match'**
-  String get startMatch;
-
-  /// No description provided for @endSetTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'End Set?'**
-  String get endSetTitle;
-
-  /// No description provided for @endSetContent.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm set result: {teamA} {scoreA} : {scoreB} {teamB}'**
-  String endSetContent(
-    Object scoreA,
-    Object scoreB,
-    Object teamA,
-    Object teamB,
-  );
-
-  /// No description provided for @keepup.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue'**
-  String get keepup;
-
-  /// No description provided for @endSet.
-  ///
-  /// In en, this message translates to:
-  /// **'End Set'**
-  String get endSet;
-
-  /// No description provided for @resetSet.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset Set'**
-  String get resetSet;
-
-  /// No description provided for @endMatch.
-  ///
-  /// In en, this message translates to:
-  /// **'End Match'**
-  String get endMatch;
-
-  /// No description provided for @noMatchesYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No matches yet'**
-  String get noMatchesYet;
-
-  /// No description provided for @setLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Set {index}'**
-  String setLabel(Object index);
-
-  /// No description provided for @swipeHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Swipe ↑ to add • Swipe ↓ to subtract'**
-  String get swipeHint;
-
   /// No description provided for @vsFormat.
   ///
   /// In en, this message translates to:
   /// **'{teamA} vs {teamB}'**
   String vsFormat(Object teamA, Object teamB);
 
-  /// No description provided for @setsCount.
+  /// No description provided for @winBy.
   ///
   /// In en, this message translates to:
-  /// **'Sets: {count}'**
-  String setsCount(Object count);
-
-  /// No description provided for @resultSets.
-  ///
-  /// In en, this message translates to:
-  /// **'Result: {a} - {b}'**
-  String resultSets(Object a, Object b);
+  /// **'Cách biệt tối thiểu'**
+  String get winBy;
 }
 
 class _AppLocalizationsDelegate
