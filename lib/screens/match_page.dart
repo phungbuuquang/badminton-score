@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/score_panel.dart';
 import '../widgets/set_banner.dart';
-import '../providers/match_controller.dart';
+import '../providers/match/match_controller.dart';
+
+class MatchArgs {
+  final String teamA;
+  final String teamB;
+  const MatchArgs(this.teamA, this.teamB);
+}
 
 class MatchPage extends ConsumerWidget {
   final String teamA;
@@ -19,40 +25,51 @@ class MatchPage extends ConsumerWidget {
     Future<void> confirmEndSetDialog() async {
       final a = state.scoreA;
       final b = state.scoreB;
-      final yes = await showDialog<bool>(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text(t.endSetTitle),
-          content: Text(t.endSetContent(state.teamA, a, b, state.teamB)),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(context, false), child: Text(t.keepup)),
-            FilledButton(onPressed: () => Navigator.pop(context, true), child: Text(t.endSet)),
-          ],
-        ),
-      ) ?? false;
+      final yes =
+          await showDialog<bool>(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text(t.endSetTitle),
+              content: Text(t.endSetContent(state.teamA, a, b, state.teamB)),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: Text(t.keepup),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text(t.endSet),
+                ),
+              ],
+            ),
+          ) ??
+          false;
       if (yes) await ctrl.confirmEndSet();
     }
 
     void onIncreaseA() async {
       ctrl.increaseA(context);
-      if (ctrl.state.scoreA >= 21 || ctrl.state.scoreB >= 21 || ctrl.state.scoreA >= 30 || ctrl.state.scoreB >= 30) {
+      if (ctrl.shouldSuggestEnd) {
         await confirmEndSetDialog();
       }
     }
+
     void onIncreaseB() async {
       ctrl.increaseB(context);
-      if (ctrl.state.scoreA >= 21 || ctrl.state.scoreB >= 21 || ctrl.state.scoreA >= 30 || ctrl.state.scoreB >= 30) {
+      if (ctrl.shouldSuggestEnd) {
         await confirmEndSetDialog();
       }
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.vsFormat(state.teamA, state.teamB)),
-      ),
+      appBar: AppBar(title: Text(t.vsFormat(state.teamA, state.teamB))),
       body: Column(
         children: [
-          SetBanner(setIndex: state.setIndex, history: state.displayHistory, setLabel: t.setLabel(state.setIndex)),
+          SetBanner(
+            setIndex: state.setIndex,
+            history: state.displayHistory,
+            setLabel: t.setLabel(state.setIndex),
+          ),
           const Divider(),
           Expanded(
             child: Row(
@@ -91,14 +108,17 @@ class MatchPage extends ConsumerWidget {
                   Expanded(
                     child: FilledButton.icon(
                       icon: const Icon(Icons.flag),
-                      onPressed: () async { await ctrl.endMatch(); if (context.mounted) Navigator.pop(context); },
+                      onPressed: () async {
+                        await ctrl.endMatch();
+                        if (context.mounted) Navigator.pop(context);
+                      },
                       label: Text(t.endMatch),
                     ),
                   ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

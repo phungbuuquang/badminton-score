@@ -1,3 +1,5 @@
+import 'package:badminton_score/core/services/hive_adapter_initialize.dart';
+import 'package:badminton_score/routes/app_routes.dart';
 import 'package:badminton_score/src/generated/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,9 +15,7 @@ import 'models/match_record.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  Hive.registerAdapter(SetRecordAdapter());
-  Hive.registerAdapter(MatchRecordAdapter());
-  await Hive.openBox<MatchRecord>('matches');
+  await HiveAdapterInitialize.initialize();
   runApp(const ProviderScope(child: BadmintonApp()));
 }
 
@@ -40,32 +40,9 @@ class BadmintonApp extends StatelessWidget {
         Locale('zh', 'CN'),
         Locale('zh', 'TW'),
       ],
-      initialRoute: '/',
-      routes: {
-        '/': (_) => const HomePage(),
-        '/history': (_) => const HistoryPage(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == '/match') {
-          final args = settings.arguments as MatchArgs;
-          return MaterialPageRoute(
-            builder: (_) => MatchPage(teamA: args.teamA, teamB: args.teamB),
-          );
-        }
-        if (settings.name == '/match_detail') {
-          final rec = settings.arguments as MatchRecord;
-          return MaterialPageRoute(
-            builder: (_) => MatchDetailPage(record: rec),
-          );
-        }
-        return null;
-      },
+      initialRoute: AppRouteName.home,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
 
-class MatchArgs {
-  final String teamA;
-  final String teamB;
-  const MatchArgs(this.teamA, this.teamB);
-}
