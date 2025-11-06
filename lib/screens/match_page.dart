@@ -19,58 +19,106 @@ class MatchPage extends ConsumerWidget {
     Future<void> confirmEndSetDialog() async {
       final a = state.scoreA;
       final b = state.scoreB;
-      final yes = await showDialog<bool>(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text(t.endSetTitle),
-          content: Text(t.endSetContent(state.teamA, a, b, state.teamB)),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(context, false), child: Text(t.keepup)),
-            FilledButton(onPressed: () => Navigator.pop(context, true), child: Text(t.endSet)),
-          ],
-        ),
-      ) ?? false;
+      final yes =
+          await showDialog<bool>(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text(t.endSetTitle),
+              content: Text(t.endSetContent(state.teamA, a, b, state.teamB)),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, false),
+                  child: Text(t.keepup),
+                ),
+                FilledButton(
+                  onPressed: () => Navigator.pop(context, true),
+                  child: Text(t.endSet),
+                ),
+              ],
+            ),
+          ) ??
+          false;
       if (yes) await ctrl.confirmEndSet();
     }
 
     void onIncreaseA() async {
       ctrl.increaseA(context);
-      if (ctrl.state.scoreA >= 21 || ctrl.state.scoreB >= 21 || ctrl.state.scoreA >= 30 || ctrl.state.scoreB >= 30) {
-        await confirmEndSetDialog();
-      }
-    }
-    void onIncreaseB() async {
-      ctrl.increaseB(context);
-      if (ctrl.state.scoreA >= 21 || ctrl.state.scoreB >= 21 || ctrl.state.scoreA >= 30 || ctrl.state.scoreB >= 30) {
+      if (ctrl.state.scoreA >= 21 ||
+          ctrl.state.scoreB >= 21 ||
+          ctrl.state.scoreA >= 30 ||
+          ctrl.state.scoreB >= 30) {
         await confirmEndSetDialog();
       }
     }
 
+    void onIncreaseB() async {
+      ctrl.increaseB(context);
+      if (ctrl.state.scoreA >= 21 ||
+          ctrl.state.scoreB >= 21 ||
+          ctrl.state.scoreA >= 30 ||
+          ctrl.state.scoreB >= 30) {
+        await confirmEndSetDialog();
+      }
+    }
+
+    // final leftPanel = state.swapped
+    //     ? ScorePanel(
+    //         teamName: state.teamB,
+    //         score: state.scoreB,
+    //         onIncrease: onIncreaseB,
+    //         onDecrease: ctrl.decreaseB,
+    //         hintText: t.swipeHint,
+    //       )
+    //     : ScorePanel(
+    //         teamName: state.teamA,
+    //         score: state.scoreA,
+    //         onIncrease: onIncreaseA,
+    //         onDecrease: ctrl.decreaseA,
+    //         hintText: t.swipeHint,
+    //       );
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.vsFormat(state.teamA, state.teamB)),
-      ),
+      appBar: AppBar(title: Text(t.vsFormat(state.teamA, state.teamB))),
       body: Column(
         children: [
-          SetBanner(setIndex: state.setIndex, history: state.displayHistory, setLabel: t.setLabel(state.setIndex)),
+          SetBanner(
+            setIndex: state.setIndex,
+            history: state.displayHistory,
+            setLabel: t.setLabel(state.setIndex),
+          ),
           const Divider(),
           Expanded(
-            child: Row(
+            child: Stack(
               children: [
-                ScorePanel(
-                  teamName: state.teamA,
-                  score: state.scoreA,
-                  onIncrease: onIncreaseA,
-                  onDecrease: ctrl.decreaseA,
-                  hintText: t.swipeHint,
+                Row(
+                  children: [
+                    ScorePanel(
+                      teamName: state.teamA,
+                      score: state.scoreA,
+                      onIncrease: onIncreaseA,
+                      onDecrease: ctrl.decreaseA,
+                      hintText: t.swipeHint,
+                    ),
+                    const VerticalDivider(width: 1),
+                    ScorePanel(
+                      teamName: state.teamB,
+                      score: state.scoreB,
+                      onIncrease: onIncreaseB,
+                      onDecrease: ctrl.decreaseB,
+                      hintText: t.swipeHint,
+                    ),
+                  ],
                 ),
-                const VerticalDivider(width: 1),
-                ScorePanel(
-                  teamName: state.teamB,
-                  score: state.scoreB,
-                  onIncrease: onIncreaseB,
-                  onDecrease: ctrl.decreaseB,
-                  hintText: t.swipeHint,
+                Align(
+                  alignment: Alignment.center,
+                  child: Tooltip(
+                    message: 'swap sides',
+                    child: FloatingActionButton.small(
+                      heroTag: 'swap_sides',
+                      onPressed: () {},
+                      child: const Icon(Icons.swap_horiz),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -91,14 +139,17 @@ class MatchPage extends ConsumerWidget {
                   Expanded(
                     child: FilledButton.icon(
                       icon: const Icon(Icons.flag),
-                      onPressed: () async { await ctrl.endMatch(); if (context.mounted) Navigator.pop(context); },
+                      onPressed: () async {
+                        await ctrl.endMatch();
+                        if (context.mounted) Navigator.pop(context);
+                      },
                       label: Text(t.endMatch),
                     ),
                   ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
