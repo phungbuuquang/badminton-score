@@ -6,11 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'theme/app_theme.dart';
-import 'screens/home_page.dart';
-import 'screens/history_page.dart';
-import 'screens/match_detail_page.dart';
-import 'screens/match_page.dart';
-import 'models/match_record.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
