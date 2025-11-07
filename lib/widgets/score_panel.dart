@@ -42,30 +42,21 @@ class ScorePanel extends StatelessWidget {
                   Text(
                     teamName,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineLarge
-                        ?.copyWith(letterSpacing: 1.2),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.headlineLarge?.copyWith(letterSpacing: 1.2),
                   ),
                   const SizedBox(height: 18),
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
                       '$score',
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge
-                          ?.copyWith(fontSize: scoreSize),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayLarge?.copyWith(fontSize: scoreSize),
                     ),
                   ),
                   const SizedBox(height: 18),
-                  Opacity(
-                    opacity: .5,
-                    child: Text(
-                      hintText,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
                 ],
               );
             },
